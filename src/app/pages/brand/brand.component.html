@@ -1,0 +1,86 @@
+
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1>Brand's Data</h1>
+    </div>
+    <div class="text-end">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ADD New Brand <i class="fa-regular fa-plus"></i>
+        </button>
+    </div>
+    <br>
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr>
+                <th scope="col"> <b>Brand ID </b> </th>
+                <th scope="col"> <b>Brand Name </b> </th>
+                <th scope="col"> <b>EDIT Brand </b> </th>
+                <th scope="col"> <b>DELETE Brand </b> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of AllBrands | paginate:{ itemsPerPage : 9 , currentPage :pro } let i = index ">
+                <td>{{b.Brand_id}}</td>
+                <td>{{b.Brand_Name}}</td>
+                <td><button type="button" (click)="editbrand(b.Brand_id)" class="btn btn-info"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button></td>
+                <td><button type="button" (click)="delete(b['Brand_id'])" class="btn btn-danger"><i
+                            class="fa-regular fa-trash-can"></i></button></td>
+            </tr>
+            <pagination-controls (pageChange)="pro = $event"></pagination-controls>
+
+        </tbody>
+    </table>
+
+    <!-- Modal For ADD Brands -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ADD New Brand</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="Addbrand" (submit)="AddBrands()">
+                        <div class="col-md-10">
+                            <label for="Brandname">Brand Name:</label>
+                            <input type="text" name="Brand_Name" class="form-control" id="Brandname"
+                                formControlName="Brand_Name" value="" placeholder="Enter Brand Name " autocomplete="given-name" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">ADD Brands</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Modal for Edit Brands -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT Brand</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editbrandForm" (submit)="Updatebrand()">
+                        <div class="col-md-10">
+                            <label for="Brand_Name">Brand Name:</label>
+                            <input type="text" name="Brand_Name" class="form-control" id="Brand_Name"
+                                formControlName="Brand_Name" value="" placeholder="Enter Brand Name " required />
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end fro edit Brands -->
+</div>

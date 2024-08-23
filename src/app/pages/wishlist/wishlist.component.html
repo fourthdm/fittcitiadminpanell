@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="text-center"><br>
+        <h1>User's Wishlists</h1>
+    </div>
+    <br>
+     <label for="batch_date">Select User_ID<br>
+        <select name="brand_id" id="brand_id" [(ngModel)]="User_id" class="form-select" placeholder="Select User_id"
+            aria-label="Multiple select example">
+        
+            <option *ngFor="let b of users " [value]="b.User_id">
+                {{b.User_id}}</option>
+        </select>
+    </label>
+    <button style="margin-left: 3%;" class="btn btn-success" (click)="userwishlist()">Search</button>
+    <br><br>
+    <table class="table  table-responsive">
+        <thead>
+            <tr>
+
+                <th scope="col"> <b>Sr.No </b> </th>
+                <th scope="col"> <b>User_id</b> </th>
+                <th scope="col"> <b>Product_Name </b> </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <div class="alert" *ngIf="wishlist.length == 0">
+                <div class="text-center">
+                    <h6>User have No Wishlist</h6>
+                    <!-- <p>.</p> -->
+                    <!-- <button class="btn btn-success" (click)="()">All Products</button> -->
+                </div>
+            </div>
+            <tr *ngFor="let u of wishlist | paginate: { itemsPerPage: 9, currentPage: pro }, let i =index">
+                <td>{{i+1}}</td>
+                <td>{{u.User_id}}</td>
+                <td>{{u.Product_Name}}</td>
+                <!-- <td>{{u.Price}}</td> -->
+
+            </tr>
+            <div class="text-center">
+                <pagination-controls (pageChange)=" pro = $event "></pagination-controls>
+            </div>
+        </tbody>
+    </table>
+    <!-- <div>
+        <input type="file" (change)="onFileSelected($event)">
+        <button (click)="onUpload()">Upload</button>
+    </div>
+    <div *ngIf="image">
+        <img [src]="image" alt="Uploaded Image">
+    </div> -->
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1>Category's Data</h1>
+    </div>
+    <div class="text-end">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ADD New Category <i class="fa-regular fa-plus"></i>
+        </button>
+    </div>
+    <br>
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr>
+                <th scope="col"> <b>Category ID </b> </th>
+                <th scope="col"> <b>CategoryName </b> </th>
+                <th scope="col"> <b>EDIT Category </b> </th>
+                <th scope="col"> <b>DELETE Category </b> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of allcategory | paginate:{ itemsPerPage : 9 , currentPage :pro } let i = index ">
+                <td>{{c.Category_id}}</td>
+                <td>{{c.Category_Name}}</td>
+                <td><button type="button" (click)="editcategory(c.Category_id)" class="btn btn-info"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button></td>
+                <td><button type="button" (click)="delete(c['Category_id'])" class="btn btn-danger"><i
+                            class="fa-regular fa-trash-can"></i></button></td>
+            </tr>
+            <pagination-controls (pageChange)="pro = $event"></pagination-controls>
+        </tbody>
+    </table>
+
+    <!-- Modal For ADD Brands -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ADD New Category</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="AddCategory" (submit)="AddCategories()">
+                        <div class="col-md-10">
+                            <label for="Category_Name">Category Name:</label>
+                            <input type="text" name="Category_Name" class="form-control" id="Category_Name"
+                                formControlName="Category_Name" value="" placeholder="Enter Category Name " required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">ADD Category</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Modal for Edit Brands -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT Brand</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="EditCategoryForm" (submit)="UpdateCategory()">
+                        <div class="col-md-10">
+                            <label for="Category_Name">Brand Name:</label>
+                            <input type="text" name="Category_Name" class="form-control" id="Category_Name"
+                                formControlName="Category_Name" value="" placeholder="Enter Category_Name Name "
+                                required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end fro edit Brands -->
+</div>

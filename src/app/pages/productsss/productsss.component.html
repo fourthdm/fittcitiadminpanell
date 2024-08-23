@@ -1,0 +1,312 @@
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1>Products</h1>
+    </div>
+    <div class="text-end">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ADD New Product <i class="fa-regular fa-plus"></i>
+        </button>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let p of Products | paginate :{itemsPerPage :3 ,currentPage : pro},let i=index">
+            <div class="card">
+                <div class="card-body">
+                    <a type="button" (click)="editproduct(p.id)" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <i class="fa-solid fa-pen-to-square fa-xl" style="color: green;"></i>
+                    </a>
+                    <span style="float:right;"> <a type="button" (click)="DeleteProduct(p['id'])">
+                            <i class="fa-regular fa-trash-can fa-xl " style="color: red;"></i></a></span>
+                    <div>
+                        <br>
+                    </div>
+                    <br>
+                    <p [ngStyle]="getStyle(p)">
+                        {{ p.status == '1' ? '' : 'Out of Stock' }}
+                    </p>
+                    <img [src]="p.image" alt="" [routerLink]="['/Home/viewproduct',p.id]"> <br> <br>
+                    <h4 class="card-title"><b>{{p.Product_Name}}</b></h4> <br> <br>
+
+                    <h6><b>Weight</b>: {{p.Weight}}</h6>
+                    <h6><b>Actual Price: </b> <b>&#8377; {{p.Price}}</b></h6>
+                    <p><b>Discount Amount:</b>&#8377; {{p.discountAmount}}</p>
+                    <p><b>Discount Price:</b> &#8377; {{p.pricewithdiscount}}</p>
+                    <p><b>Category Name:</b> {{p.Category_Name}}</p>
+                    <p><b>Brand Name:</b> {{p.Brand_Name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <pagination-controls (pageChange)="pro = $event"></pagination-controls>
+        </div>
+    </div>
+
+    <!-- Modal For ADD Brands -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ADD New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="ADDProduct" (ngSubmit)="onFormSubmit()" class="row g-3 needs-validation"
+                        novalidate>
+
+                        <!-- <div class="col-md-12">
+                            <label for="Product_Name">Product is in Stock :</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" value="status"
+                                    id="status" formControlName="status" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked" *ngIf="">Checked
+                                    Product is
+                                    Available or Not</label>
+                            </div>
+                        </div> -->
+                        <div class="col-md-12">
+                            <label for="status">Product is in Stock :</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="status" formControlName="status"
+                                    (change)="toggleStatus($event)">
+                                <label class="form-check-label" for="status">Checked Product is Available or Not</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Product_Name">Product Name:</label>
+                            <input type="text" name="Product_Name" class="form-control" id="Product_Name"
+                                formControlName="Product_Name" value="" placeholder="Enter Product Name " required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="description">Description :</label>
+                            <textarea type="text" name="description" class="form-control" id="description"
+                                formControlName="description" value="" placeholder="Enter description" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="benefits">Benefits :</label>
+                            <textarea type="text" name="benefits" class="form-control" id="benefits"
+                                formControlName="benefits" value="" placeholder="Enter benefits" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="ingredients">Ingredients</label>
+                            <textarea type="text" name="ingredients" class="form-control" id="ingredients"
+                                formControlName="ingredients" value="" placeholder="Enter ingredients" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Price">Price:</label>
+                            <input type="number" name="Price" class="form-control" id="Price" formControlName="Price"
+                                placeholder="Enter Price." required>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <label for="discountAmount">Discount:</label>
+                            <input type="number" name="discountAmount" class="form-control" id="discountAmount"
+                                formControlName="discountAmount" placeholder="Enter discountAmount." required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Weight">Weight:</label>
+                            <input type="text" name="Weight" class="form-control" id="Weight" formControlName="Weight"
+                                placeholder="Enter Weight of Product" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Category_id">Category ID :</label>
+                            <input type="number" name="Category_id" class="form-control" id="Category_id"
+                                formControlName="Category_id" value="" placeholder="Enter Category id" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_id">Brand ID :</label>
+                            <input type="number" name="Brand_id" class="form-control" id="Brand_id"
+                                formControlName="Brand_id" value="" placeholder="Enter Brand id" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Category_Name">Category Name :</label>
+                            <input type="text" name="Category_Name" class="form-control" id="Category_Name"
+                                formControlName="Category_Name" value="" placeholder="Enter Category Name" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_Name">Brand Name:</label>
+                            <input type="text" name="Brand_Name" class="form-control" id="Brand_Name"
+                                formControlName="Brand_Name" value="" placeholder="Enter Brand Brand_Name" required>
+                        </div>
+
+                        <div>
+                            <label>Image:</label> <br>
+                            <input type="file" (change)="onFileSelected($event, 'image')">
+                        </div>
+
+                        <div>
+                            <label>Main Image:</label> <br>
+                            <input type="file" (change)="onFileSelected($event, 'mainimage')">
+                        </div>
+
+                        <div>
+                            <label>Back Image:</label> <br>
+                            <input type="file" (change)="onFileSelected($event, 'backimage')">
+                        </div>
+
+                        <div>
+                            <label>Table Image:</label><br>
+                            <input type="file" (change)="onFileSelected($event, 'tableimage')">
+                        </div>
+
+                        <!-- <button (click)="()">add</button> -->
+                        <div class="text-center">
+                            <div class="col-12">
+                                <button class="btn btn-success" style="color: white;" type="submit">
+                                    Add Products</button> <br> <br>
+                            </div>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Modal for Edit Brands -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT Brand</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="EditProductform" (ngSubmit)="updateProduct()" class="row g-3 needs-validation"
+                        novalidate>
+                        <!-- 
+                        <div class="col-md-12"> <label for="Product_Name">Product is in Stock :</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" value="" id="status"
+                                    formControlName="status" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Checked Product is
+                                    Available or Not</label>
+                            </div>
+                        </div> -->
+
+
+                        <div class="col-md-12">
+                            <label for="status">Product is in Stock :</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="status" formControlName="status"
+                                    (change)="updateStatus($event)">
+                                <label class="form-check-label" for="status">Checked Product is Available or Not</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Product_Name">Product Name:</label>
+                            <input type="text" name="Product_Name" class="form-control" id="Product_Name"
+                                formControlName="Product_Name" value="" placeholder="Enter Product Name " required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="description">Description :</label>
+                            <textarea type="text" name="description" class="form-control" id="description"
+                                formControlName="description" value="" placeholder="Enter description" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="benefits">Benefits :</label>
+                            <textarea type="text" name="benefits" class="form-control" id="benefits"
+                                formControlName="benefits" value="" placeholder="Enter benefits" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="ingredients">Ingredients</label>
+                            <textarea type="text" name="ingredients" class="form-control" id="ingredients"
+                                formControlName="ingredients" value="" placeholder="Enter ingredients" required>
+                        </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Price">Price:</label>
+                            <input type="number" name="Price" class="form-control" id="Price" formControlName="Price"
+                                placeholder="Enter Price." required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="discountAmount">DiscountAmount:</label>
+                            <input type="number" name="discountAmount" class="form-control" id="discountAmount"
+                                formControlName="discountAmount" placeholder="Enter Discount." required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Weight">Weight:</label>
+                            <input type="text" name="Weight" class="form-control" id="Weight" formControlName="Weight"
+                                placeholder="Enter Weight of Product" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Category_id">Category ID :</label>
+                            <input type="number" name="Category_id" class="form-control" id="Category_id"
+                                formControlName="Category_id" value="" placeholder="Enter Category id" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_id">Brand ID :</label>
+                            <input type="number" name="Brand_id" class="form-control" id="Brand_id"
+                                formControlName="Brand_id" value="" placeholder="Enter Brand id" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Category_Name">Category Name :</label>
+                            <input type="text" name="Category_Name" class="form-control" id="Category_Name"
+                                formControlName="Category_Name" value="" placeholder="Enter Category Name" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_Name">Brand Name:</label>
+                            <input type="text" name="Brand_Name" class="form-control" id="Brand_Name"
+                                formControlName="Brand_Name" value="" placeholder="Enter Brand Brand_Name" required>
+                        </div>
+                        <div>
+                            <label>Image:</label> <br>
+                            <input type="file" (change)="onFileChange($event, 'image')">
+                        </div>
+
+                        <div>
+                            <label>Main Image:</label> <br>
+                            <input type="file" (change)="onFileChange($event, 'mainimage')">
+                        </div>
+
+                        <div>
+                            <label>Back Image:</label> <br>
+                            <input type="file" (change)="onFileChange($event, 'backimage')">
+                        </div>
+
+                        <div>
+                            <label>Table Image:</label><br>
+                            <input type="file" (change)="onFileChange($event, 'tableimage')">
+                        </div>
+
+                        <!-- <button (click)="()">add</button> -->
+                        <div class="text-center">
+                            <div class="col-12">
+                                <button class="btn btn-success" style="color: white;" type="submit">
+                                    Update Products</button> <br> <br>
+                            </div>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end fro edit Brands -->
+</div>

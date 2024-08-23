@@ -1,0 +1,175 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin Panel</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="assets/logo.png" class="img elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">FITTCITI</a>
+            </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <!-- <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div> -->
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/admin']">
+                        <i class="fa-solid fa-hospital-user fa-xl"></i>
+                        <p>
+                            Admin's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link " [routerLink]="['/Home/product']">
+                        <!-- <i class="nav-icon far fa-circle nav-icon"></i> -->
+                        <i class="fa-brands fa-product-hunt fa-xl"></i>
+                        <p>
+                            Products
+                        </p>
+                    </a>
+                    <!-- <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/Getproducts']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Products</p>
+                    </a>
+                  </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/Addproducts']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Products</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link"  [routerLink]="['/Editproducts']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Edit Products</p>
+                    </a>
+                  </li> 
+                </ul> -->
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link " [routerLink]="['/Home/category']">
+                        <!-- <i class="nav-icon far fa-circle nav-icon"></i> -->
+                        <i class="fa-solid fa-layer-group fa-xl"></i>
+                        <p>
+                            Category's
+
+                        </p>
+                    </a>
+                    <!-- <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/Category']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Categorys</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/Category']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Categorys</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link"  [routerLink]="['/Category']">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Edit Categorys</p>
+                    </a>
+                  </li>
+                </ul> -->
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/brand']">
+                        <!-- <i class="nav-icon far fa-circle nav-icon"></i> -->
+                        <i class="fa-brands fa-bandcamp fa-xl"></i>
+                        <p>
+                            Brand's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/order']">
+                        <!-- <i class="nav-icon far fa-circle nav-icon"></i> -->
+                        <i class="fa-solid fa-cart-plus fa-xl"></i>
+                        <p> order's </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/user']">
+                        <i class="fa-solid fa-users fa-xl"></i>
+                        <p>
+                            User's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/wishlist']">
+                        <i class="fa-solid fa-list-check fa-xl"></i>
+                        <p>
+                            Wishlist
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/coupons']">
+                        <i class="fa-solid fa-ticket fa-xl"></i>
+                        <p>
+                            Coupons
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" [routerLink]="['/Home/enquiry']">
+                        <i class="fa-solid fa-clipboard-list fa-xl"></i>
+                        <p>
+                            Enquiry's
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link" (click)="logout()">
+                        <i class="fa-solid fa-power-off fa-xl"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</aside>

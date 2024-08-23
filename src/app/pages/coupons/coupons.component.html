@@ -1,0 +1,136 @@
+
+<div class="container">
+    <br>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Coupon</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="couponsform" (ngSubmit)="Addcoupons()" class="row g-3 needs-validation"
+                        novalidate>
+
+                        <div class="col-md-12">
+                            <label for="code">Coupon code:</label>
+                            <input type="text" name="code" class="form-control" id="code" formControlName="code"
+                                value="" placeholder="Enter coupon code " required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="discount">Discount by percentge:</label>
+                            <textarea type="decimal" name="discount" class="form-control" id="discount"
+                                formControlName="discount" value="" placeholder="Enter discount" required>
+                            </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_id">Brand_id :</label>
+                            <textarea type="text" name="Brand_id" class="form-control" id="Brand_id"
+                                formControlName="Brand_id" value="" placeholder="Enter Brand_id" required>
+                        </textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="col-12">
+                                <button class="btn btn-success" style="color: white;" type="submit">
+                                    Add Coupon</button> <br> <br>
+                            </div>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Coupon</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="Editcouponsform" (ngSubmit)="updatecoupon()" class="row g-3 needs-validation"
+                        novalidate>
+
+                        <div class="col-md-12">
+                            <label for="code">Coupon code:</label>
+                            <input type="text" name="code" class="form-control" id="code" formControlName="code"
+                                value="" placeholder="Enter coupon code " required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="discount">Discount by percentge:</label>
+                            <textarea type="decimal" name="discount" class="form-control" id="discount"
+                                formControlName="discount" value="" placeholder="Enter discount" required>
+                            </textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Brand_id">Brand_id :</label>
+                            <textarea type="text" name="Brand_id" class="form-control" id="Brand_id"
+                                formControlName="Brand_id" value="" placeholder="Enter Brand_id" required>
+                        </textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="col-12">
+                                <button class="btn btn-success" style="color: white;" type="submit">
+                                    Update Coupon</button> <br> <br>
+                            </div>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <h1 style="color: black;"> All Coupons</h1>
+    </div>
+    <br>
+    <div class="">
+
+        <div class="text-start">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Generate new Coupon <i class="fa-regular fa-plus"></i>
+            </button>
+        </div>
+        <br>
+        <table class="table  table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col"> <b>No.</b> </th>
+                    <th scope="col"> <b>Code</b> </th>
+                    <th scope="col"> <b>Discount</b> </th>
+                    <th scope="col"> <b>Brand_id</b> </th>
+                    <th scope="col"> <b>Action</b> </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let c of coupons | paginate: { itemsPerPage: 12, currentPage: pro }, let i =index">
+                    <td>{{i+1}}</td>
+                    <td>{{c.code}}</td>
+                    <td>{{c.discount}}</td>
+                    <td>{{c.Brand_id}}</td>
+
+                    <td> <button type="button" class="btn btn-info" (click)="editcoupon(c.id)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button></td>
+                    <td><button class="btn btn-danger" type="button" (click)="delete(c['id'])"
+                            class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></td>
+                </tr>
+                <div class="text-center">
+                    <pagination-controls (pageChange)=" pro = $event "></pagination-controls>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</div>

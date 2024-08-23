@@ -1,0 +1,91 @@
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1>Order's Data</h1>
+    </div>
+    <br>
+    <br>
+
+    <div class="table-responsive">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col"> <b>Order Id </b> </th>
+                    <th scope="col"> <b>User Id </b> </th>
+                    <th scope="col"> <b>Order Date </b> </th>
+                    <th scope="col"> <b>Delivery Date </b> </th>
+                    <th scope="col"> <b>Status </b> </th>
+                    <th scope="col"> <b>Total Amount </b> </th>
+                    <th scope="col"> <b>Address </b> </th>
+                    <th scope="col"> <b>Cart_id </b> </th>
+                    <th scope="col"> <b>Edit order </b> </th>
+                    <th scope="col"> <b>Delete order </b> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of allorder | paginate : {itemsPerPage : 10 , currentPage : pro}, let i =index">
+                    <td>{{o.id}}</td>
+                    <td>{{o.User_id}}</td>
+                    <td>{{o.Order_date | date:'d/MMM/yyyy'}}</td>
+                    <td>{{o.Delivery_date}}</td>
+
+                    <td>{{o.status}}</td>
+                    <!-- <td>
+                        <form [formGroup]="adddeliverydateform" (submit)="adddeliverydate()">
+                            <input type="date" name="Delivery_date" formControlName="Delivery_date" id="Delivery_date">
+
+
+                            <input type="text" name="status" formControlName="status" id="status">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </td> -->
+
+
+                    <td>{{o.Total_amount}}</td>
+                    <td>{{o.Shipping_address}}</td>
+                    <td>{{o.Cart_id}}</td>
+
+                    <td> <button type="button" class="btn btn-info" (click)="editbrand(o.id)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button></td>
+
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDIT Brand</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form [formGroup]="adddeliverydateform" (submit)="adddeliverydate()">
+                                        <div class="col-md-10">
+                                            <label for="Delivery_date">Delivery date:</label>
+                                            <input type="date" name="Delivery_date" formControlName="Delivery_date"
+                                                id="Delivery_date">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <label for="status">status:</label>
+                                            <input type="text" name="status" formControlName="status" id="status">
+                                        </div>
+                                        <br>
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <td><button class="btn btn-danger" type="button" (click)="delete(o['id'])" class="btn btn-danger"><i
+                                class="fa-regular fa-trash-can"></i></button></td>
+                </tr>
+                <pagination-controls (pageChange)="pro = $event"></pagination-controls>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

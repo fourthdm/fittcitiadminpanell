@@ -1,0 +1,45 @@
+
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1 style="color: black;">All Enquiry</h1>
+    </div>
+    <br>
+    <div class="">
+        <table class="table  table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col"> <b>No.</b> </th>
+                    <th scope="col"> <b>Name</b> </th>
+                    <th scope="col"> <b>Email</b> </th>
+                    <th scope="col"> <b>Mobile No</b> </th>
+                    <th scope="col"> <b>Message</b> </th>
+                    <th scope="col"> <b>Review</b> </th>
+                    <th scope="col"> <b>Date</b> </th>
+                    <th scope="col"> <b>Action</b> </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let u of enquiry | paginate: { itemsPerPage: 8, currentPage: pro }, let i =index">
+                    <td>{{i+1}}</td>
+                    <td>{{u.Name}}</td>
+                    <td>{{u.Email}}</td>
+                    <td>{{u.Mobileno}}</td>
+                    <td>{{u.Message}}</td>
+                    <td>{{u.Review}}</td>
+                    <td>{{u.Date | date:'d/MMM/yyyy'}}</td>
+                    <!-- <td> <button type="button" class="btn btn-info" (click)="updateuser()" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button></td> -->
+                    <td><button class="btn btn-danger" type="button" (click)="delete(u['Id'])"
+                            class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></td>
+                </tr>
+                <div class="text-center">
+                    <pagination-controls (pageChange)=" pro = $event "></pagination-controls>
+                </div>
+            </tbody>                
+        </table>
+    </div>
+</div>
